@@ -27,30 +27,52 @@
       gap: 10px;
       transition: opacity 0.5s ease;
     }
-    .notification i { color: #2a7fff; }
-    .pre-filled { animation: highlight 2s ease; }
-    @keyframes highlight {
-      0% { background-color: rgba(42, 127, 255, 0.1); }
-      100% { background-color: transparent; }
+
+    .notification i {
+      color: #2a7fff;
     }
-    .pre-filled .form-group { position: relative; }
+
+    .pre-filled {
+      animation: highlight 2s ease;
+    }
+
+    @keyframes highlight {
+      0% {
+        background-color: rgba(42, 127, 255, 0.1);
+      }
+
+      100% {
+        background-color: transparent;
+      }
+    }
+
+    .pre-filled .form-group {
+      position: relative;
+    }
+
     .pre-filled input,
-    .pre-filled select { border-left: 3px solid #2a7fff !important; }
-    
+    .pre-filled select {
+      border-left: 3px solid #2a7fff !important;
+    }
+
     /* Graph overlay styles */
     .graph-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.95);
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
       z-index: 2000;
       align-items: center;
       justify-content: center;
     }
+
     .graph-overlay.active {
       display: flex;
     }
+
     .graph-container {
       position: relative;
       width: 80%;
@@ -59,17 +81,20 @@
       background: #111;
       padding: 1rem;
       border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
     }
+
     .close-graph {
       position: absolute;
-      top: 0.5rem; right: 0.5rem;
+      top: 0.5rem;
+      right: 0.5rem;
       background: transparent;
       border: none;
       color: #fff;
       font-size: 1.5rem;
       cursor: pointer;
     }
+
     #trainingChart {
       width: 100% !important;
       height: 100% !important;
@@ -180,7 +205,7 @@
     </div>
   </main>
 
-  <!-- Graph Overlay -->
+
   <div id="graphOverlay" class="graph-overlay">
     <div class="graph-container">
       <button id="closeGraph" class="close-graph">&times;</button>
@@ -188,23 +213,22 @@
     </div>
   </div>
 
-  <!-- Training logic (unchanged) -->
   <script type="module" src="main.js"></script>
 
-  <!-- Graph control & chart init -->
-  <script>
-    const showBtn   = document.getElementById('show-graph-btn');
-    const overlay   = document.getElementById('graphOverlay');
-    const closeBtn  = document.getElementById('closeGraph');
-    const ctx       = document.getElementById('trainingChart').getContext('2d');
 
-    // Initialize Chart.js chart
+  <script>
+    const showBtn = document.getElementById('show-graph-btn');
+    const overlay = document.getElementById('graphOverlay');
+    const closeBtn = document.getElementById('closeGraph');
+    const ctx = document.getElementById('trainingChart').getContext('2d');
+
+
     const trainingChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: [],
         datasets: [{
-          label: 'Training Loss',
+          label: 'Test Accuracy',
           data: [],
           borderColor: '#2a7fff',
           borderWidth: 2,
@@ -214,11 +238,11 @@
       options: { animation: false, responsive: true }
     });
 
-    // Show / hide overlay
+
     showBtn.addEventListener('click', () => overlay.classList.add('active'));
     closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
 
-    // Expose for real‑time updates
+
     window.updateTrainingGraph = (step, loss) => {
       trainingChart.data.labels.push(step);
       trainingChart.data.datasets[0].data.push(loss);
@@ -226,16 +250,15 @@
     };
   </script>
 
-  <!-- Existing pre-fill logic -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const topologySelect         = document.getElementById('topology');
-      const signalingServerInput   = document.getElementById('signaling_server');
-      const numUsersInput          = document.getElementById('num_users');
-      const sessionIdInput         = document.getElementById('session_id');
-      const epochsInput            = document.getElementById('epochs');
-      const numCollaboratorsInput  = document.getElementById('num_collaborators');
-      const sessionId              = localStorage.getItem('sessionId');
+      const topologySelect = document.getElementById('topology');
+      const signalingServerInput = document.getElementById('signaling_server');
+      const numUsersInput = document.getElementById('num_users');
+      const sessionIdInput = document.getElementById('session_id');
+      const epochsInput = document.getElementById('epochs');
+      const numCollaboratorsInput = document.getElementById('num_collaborators');
+      const sessionId = localStorage.getItem('sessionId');
 
       if (sessionId) {
         sessionIdInput.value = sessionId;
