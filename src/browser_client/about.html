@@ -3,103 +3,104 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project SONAR - About</title>
-
-  <link rel="stylesheet" href="./styling/about.css" />
+  <link rel="stylesheet" href="./styling/index.css" />
 </head>
 
-<body>
-
-
+<body class="about">
+  <!-- Top Bar -->
   <header class="top-bar">
-    <div class="logo-container">
-
-      <img src="./assets/logo.png" alt="Logo" class="logo" />
-
-      <span class="project-name">Project SONAR</span>
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Project SONAR Logo" class="mit-logo" />
+      <div class="text-group">
+        <div class="project-sonar">Project SONAR</div>
+      </div>
     </div>
-
-    <div class="hamburger-menu" id="hamburger-menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+    <div class="menu-icon">
+      <button class="session-btn" onclick="location.href='index.html'">Home</button>
+      <button class="session-btn" onclick="location.href='browser.html'">Start Training</button>
+      <button class="session-btn" onclick="location.href='sessions.html'">Explore</button>
     </div>
   </header>
 
-  <nav class="mobile-nav" id="mobile-nav">
-    <ul>
-      <li><a href="./index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="./browser.html">Session</a></li>
-      <li><a href="./sessions.html">Explore Sessions</a></li>
-    </ul>
-  </nav>
+  <!-- About Slides -->
+  <div class="slides">
+    <!-- Slide 1: Overview -->
+    <section class="slide active" style="background-image: url('assets/webwall.jpeg')">
+      <div class="content">
+        <h1>About Project <span class="highlight">SONAR</span></h1>
+        <h2>Self-Organizing Network of Aggregated Representations</h2>
+        <p>A project by MIT Media Lab</p>
+      </div>
+    </section>
 
-
-  <section class="hero about-hero">
-    <div class="about-container">
-
-      <h1>About Project <span class="highlight">SONAR</span></h1>
-      <h2>Self-Organizing Network of Aggregated Representations</h2>
-      <p class="subtitle">A project by MIT Media Lab</p>
-      
-      <div class="about-section">
+    <!-- Slide 2: What is SONAR -->
+    <section class="slide" style="background-image: url('assets/webwall.jpeg')">
+      <div class="content">
         <h3>What is SONAR?</h3>
         <p>
-          SONAR is a collaborative learning platform where users can work together to improve their machine learning models
-          without sharing their raw data. Instead of centralizing all the data and computing power, SONAR allows participants
-          to collaborate by sharing only model representations while keeping their original data private.
+          SONAR is a collaborative learning platform where users improve their machine learning models
+          without sharing raw data. Participants share model representations, ensuring privacy.
         </p>
       </div>
-      
-      <div class="about-section">
+    </section>
+
+    <!-- Slide 3: How It Works -->
+    <section class="slide" style="background-image: url('assets/webwall.jpeg')">
+      <div class="content">
         <h3>How Does It Work?</h3>
         <p>
-          Using a peer-to-peer approach similar to BitTorrent, SONAR enables devices to connect directly with each other
-          to share model weights and insights. This decentralized approach means you can train powerful computer vision models
-          without needing expensive hardware or sharing sensitive data.
+          SONAR uses a peer-to-peer network similar to BitTorrent, allowing devices to exchange model weights
+          and insights directly while keeping raw datasets local.
         </p>
         <p>
-          Our unique cross-language system allows browser-based JavaScript users and Python-based nodes to seamlessly
-          collaborate, making advanced machine learning accessible to more people and devices.
+          Our cross-language system supports both browser-based JavaScript and Python nodes,
+          making advanced ML accessible across platforms.
         </p>
       </div>
-      
-      <div class="about-section">
+    </section>
+
+    <!-- Slide 4: Why Use SONAR -->
+    <section class="slide" style="background-image: url('assets/webwall.jpeg')">
+      <div class="content">
         <h3>Why Use SONAR?</h3>
         <ul>
-          <li><strong>Privacy-Preserving:</strong> Train models without sharing raw data</li>
-          <li><strong>Accessible:</strong> Collaborate using browsers or Python environments</li>
-          <li><strong>Efficient:</strong> Reduce individual computational requirements</li>
-          <li><strong>Effective:</strong> Achieve results comparable to centralized training</li>
-          <li><strong>Democratized:</strong> Make advanced ML accessible to more people</li>
+          <li><strong>Privacy-Preserving:</strong> Data stays on your device</li>
+          <li><strong>Accessible:</strong> Browser & Python clients</li>
+          <li><strong>Efficient:</strong> Lower computational cost</li>
+          <li><strong>Effective:</strong> Centralized-quality performance</li>
+          <li><strong>Democratized:</strong> ML for everyone</li>
         </ul>
       </div>
-      
-      <div class="about-section">
+    </section>
+
+    <!-- Slide 5: Get Started -->
+    <section class="slide" style="background-image: url('assets/webwall.jpeg')">
+      <div class="content">
         <h3>Get Started</h3>
-        <p>
-          Ready to join a collaborative training session or create your own? SONAR makes it easy to participate
-          in the future of decentralized machine learning.
-        </p>
+        <p>Ready to join or host a collaborative training session? SONAR makes it easy.</p>
         <div class="button-group">
-          <a href="./sessions.html" class="btn explore-btn">Explore Sessions</a>
-          <a href="./browser.html" class="btn training-btn">Start Training</a>
+          <a href="sessions.html" class="btn explore-btn">Explore Sessions</a>
+          <a href="browser.html" class="btn training-btn">Start Training</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <script>
+  <!-- Navigation Dots -->
+  <div class="dot-indicator">
+    <ul>
+      <li class="active" data-slide="0"></li>
+      <li data-slide="1"></li>
+      <li data-slide="2"></li>
+      <li data-slide="3"></li>
+      <li data-slide="4"></li>
+    </ul>
+  </div>
 
-    const hamburger = document.getElementById("hamburger-menu");
-    const mobileNav = document.getElementById("mobile-nav");
-
-    hamburger.addEventListener("click", function () {
-      mobileNav.classList.toggle("active");
-    });
-  </script>
-
+  <!-- Scroll Handling Script -->
+  <script src="index.js"></script>
 </body>
 
 </html>

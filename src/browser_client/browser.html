@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browser App</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
   <link rel="stylesheet" href="./styling/browser.css" />
+  <!-- Chart.js for graphing -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     .notification {
       background-color: rgba(42, 127, 255, 0.1);
@@ -25,54 +27,72 @@
       gap: 10px;
       transition: opacity 0.5s ease;
     }
-    
-    .notification i {
-      color: #2a7fff;
-    }
-    
-    .pre-filled {
-      animation: highlight 2s ease;
-    }
-    
+    .notification i { color: #2a7fff; }
+    .pre-filled { animation: highlight 2s ease; }
     @keyframes highlight {
       0% { background-color: rgba(42, 127, 255, 0.1); }
       100% { background-color: transparent; }
     }
+    .pre-filled .form-group { position: relative; }
+    .pre-filled input,
+    .pre-filled select { border-left: 3px solid #2a7fff !important; }
     
-    .pre-filled .form-group {
-      position: relative;
+    /* Graph overlay styles */
+    .graph-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.95);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
     }
-    
-    .pre-filled input, 
-    .pre-filled select {
-      border-left: 3px solid #2a7fff !important;
+    .graph-overlay.active {
+      display: flex;
+    }
+    .graph-container {
+      position: relative;
+      width: 80%;
+      max-width: 800px;
+      height: 60vh;
+      background: #111;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    .close-graph {
+      position: absolute;
+      top: 0.5rem; right: 0.5rem;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    #trainingChart {
+      width: 100% !important;
+      height: 100% !important;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- Top Bar -->
   <header class="top-bar">
-    <div class="logo-container">
-      <img src="assets/logo.png" alt="Browser App Logo" class="logo" />
-      <span class="project-name">Project SONAR</span>
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="Project SONAR Logo" class="mit-logo" />
+      <div class="text-group">
+        <div class="project-sonar">Project SONAR</div>
+      </div>
     </div>
-    <div class="hamburger-menu" id="hamburger-menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
+    <div class="menu-icon">
+      <button class="session-btn" onclick="location.href='index.html'">Home</button>
+      <button class="session-btn" onclick="location.href='about.html'">About Us</button>
+      <button class="session-btn" onclick="location.href='sessions.html'">Explore</button>
     </div>
   </header>
-
-  <nav class="mobile-nav" id="mobile-nav">
-    <ul>
-      <li><a href="./index.html">Home</a></li>
-      <li><a href="./about.html">About</a></li>
-      <li><a href="./browser.html">Session</a></li>
-      <li><a href="./sessions.html">Explore Sessions</a></li>
-    </ul>
-  </nav>
-
 
   <div class="session-title">
     <h1>Session</h1>
@@ -92,23 +112,23 @@
           </div>
           <div class="form-group">
             <label for="signaling_server">Signaling Server</label>
-            <input type="text" id="signaling_server" name="signaling_server" value="ws://18.27.79.107:8888" required>
+            <input type="text" id="signaling_server" name="signaling_server" value="ws://18.27.79.107:8888" required />
           </div>
           <div class="form-group">
             <label for="num_users">Number of Users</label>
-            <input type="text" id="num_users" name="num_users" value="3" required>
+            <input type="text" id="num_users" name="num_users" value="3" required />
           </div>
           <div class="form-group">
             <label for="session_id">Session ID</label>
-            <input type="text" id="session_id" name="session_id" value="1111" required>
+            <input type="text" id="session_id" name="session_id" value="1111" required />
           </div>
           <div class="form-group">
             <label for="epochs">Epochs</label>
-            <input type="text" id="epochs" name="epochs" value="10" required>
+            <input type="text" id="epochs" name="epochs" value="10" required />
           </div>
           <div class="form-group">
             <label for="num_collaborators">Num Collaborators</label>
-            <input type="text" id="num_collaborators" name="num_collaborators" value="1" required>
+            <input type="text" id="num_collaborators" name="num_collaborators" value="1" required />
           </div>
           <button type="button" id="save-config-button">Save Config</button>
           <button type="button" id="start-button" class="connect-button" disabled>Connect</button>
@@ -123,17 +143,16 @@
               <div class="data-input-container">
                 <div class="data-upload">
                   <label for="train-data-input" class="file-label">Upload File</label>
-                  <input id="train-data-input" type="file" accept=".json">
+                  <input id="train-data-input" type="file" accept=".json" />
                 </div>
               </div>
             </div>
-            
             <div class="data-block">
               <h2>Testing Data (Optional)</h2>
               <div class="data-input-container">
                 <div class="data-upload">
                   <label for="test-data-input" class="file-label">Upload File</label>
-                  <input id="test-data-input" type="file" accept=".json">
+                  <input id="test-data-input" type="file" accept=".json" />
                 </div>
               </div>
               <p class="input-note">If not provided, 20% of training data will be used for validation</p>
@@ -148,91 +167,98 @@
               </select>
             </div>
           </div>
-        
-        </section>        
+        </section>
 
         <section class="card logs-card">
           <h2>Logs</h2>
+          <button id="show-graph-btn" class="session-btn" style="margin-bottom:1rem;">
+            Show Training Graph
+          </button>
           <div id="console-output"></div>
         </section>
       </div>
     </div>
   </main>
 
-  <script type="module" src="main.js"></script>
-  <script>
-    const hamburger = document.getElementById("hamburger-menu");
-    const mobileNav = document.getElementById("mobile-nav");
+  <!-- Graph Overlay -->
+  <div id="graphOverlay" class="graph-overlay">
+    <div class="graph-container">
+      <button id="closeGraph" class="close-graph">&times;</button>
+      <canvas id="trainingChart"></canvas>
+    </div>
+  </div>
 
-    hamburger.addEventListener("click", () => {
-      mobileNav.classList.toggle("active");
+  <!-- Training logic (unchanged) -->
+  <script type="module" src="main.js"></script>
+
+  <!-- Graph control & chart init -->
+  <script>
+    const showBtn   = document.getElementById('show-graph-btn');
+    const overlay   = document.getElementById('graphOverlay');
+    const closeBtn  = document.getElementById('closeGraph');
+    const ctx       = document.getElementById('trainingChart').getContext('2d');
+
+    // Initialize Chart.js chart
+    const trainingChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Training Loss',
+          data: [],
+          borderColor: '#2a7fff',
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: { animation: false, responsive: true }
     });
 
-    // Load session configuration from localStorage if available
+    // Show / hide overlay
+    showBtn.addEventListener('click', () => overlay.classList.add('active'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+
+    // Expose for real‑time updates
+    window.updateTrainingGraph = (step, loss) => {
+      trainingChart.data.labels.push(step);
+      trainingChart.data.datasets[0].data.push(loss);
+      trainingChart.update('none');
+    };
+  </script>
+
+  <!-- Existing pre-fill logic -->
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Get form elements
-      const topologySelect = document.getElementById('topology');
-      const signalingServerInput = document.getElementById('signaling_server');
-      const numUsersInput = document.getElementById('num_users');
-      const sessionIdInput = document.getElementById('session_id');
-      const epochsInput = document.getElementById('epochs');
-      const numCollaboratorsInput = document.getElementById('num_collaborators');
-      
-      // Check if we have session configuration in localStorage
-      const sessionId = localStorage.getItem('sessionId');
-      
+      const topologySelect         = document.getElementById('topology');
+      const signalingServerInput   = document.getElementById('signaling_server');
+      const numUsersInput          = document.getElementById('num_users');
+      const sessionIdInput         = document.getElementById('session_id');
+      const epochsInput            = document.getElementById('epochs');
+      const numCollaboratorsInput  = document.getElementById('num_collaborators');
+      const sessionId              = localStorage.getItem('sessionId');
+
       if (sessionId) {
-        // Set session ID
         sessionIdInput.value = sessionId;
-        
-        // Set other fields if available
-        if (localStorage.getItem('topology')) {
-          // Find the option with the matching value and select it
-          const topologyValue = localStorage.getItem('topology');
-          for (let i = 0; i < topologySelect.options.length; i++) {
-            if (topologySelect.options[i].value === topologyValue) {
-              topologySelect.selectedIndex = i;
-              break;
-            }
-          }
-        }
-        
-        if (localStorage.getItem('signalingServer')) {
+        if (localStorage.getItem('topology'))
+          topologySelect.value = localStorage.getItem('topology');
+        if (localStorage.getItem('signalingServer'))
           signalingServerInput.value = localStorage.getItem('signalingServer');
-        }
-        
-        if (localStorage.getItem('numUsers')) {
+        if (localStorage.getItem('numUsers'))
           numUsersInput.value = localStorage.getItem('numUsers');
-        }
-        
-        if (localStorage.getItem('epochs')) {
+        if (localStorage.getItem('epochs'))
           epochsInput.value = localStorage.getItem('epochs');
-        }
-        
-        if (localStorage.getItem('numCollaborators')) {
+        if (localStorage.getItem('numCollaborators'))
           numCollaboratorsInput.value = localStorage.getItem('numCollaborators');
-        }
-        
-        // Highlight the form to indicate it's been pre-filled
+
         const configForm = document.getElementById('config-form');
         configForm.classList.add('pre-filled');
-        
-        // Add a notification that the form was pre-filled from session
         const notification = document.createElement('div');
         notification.className = 'notification';
         notification.innerHTML = `<i class="fas fa-info-circle"></i> Form pre-filled from session ${sessionId}`;
-        
-        // Insert notification before the form
         configForm.parentNode.insertBefore(notification, configForm);
-        
-        // Auto-hide notification after 5 seconds
         setTimeout(() => {
           notification.style.opacity = '0';
-          setTimeout(() => {
-            if (notification.parentNode) {
-              notification.parentNode.removeChild(notification);
-            }
-          }, 500);
+          setTimeout(() => notification.remove(), 500);
         }, 5000);
       }
     });

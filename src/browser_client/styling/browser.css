@@ -1,301 +1,271 @@
+/* browser.css */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html,
-body {
-    height: auto;
+  }
+  
+  
+  html, body {
+    width: 100%;
     min-height: 100vh;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #e0e0e0;
-    background-color: #000;
-    background: url("../assets/webwall.jpeg") no-repeat center center;
-    background-size: cover;
+    background: url("../assets/webwall.jpeg") no-repeat center center/cover;
     overflow-y: auto;
-}
+  }
+  
 
-.top-bar {
-    position: sticky;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    background-color: rgba(0, 0, 0, 0.8);
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 60px;
+    background: rgba(0,0,0,0.85);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.5rem;
     z-index: 1000;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    height: 40px;
-    margin-right: 1rem;
-}
-
-.project-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.hamburger-menu {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 0.4rem;
-}
-
-.hamburger-menu .line {
-    width: 25px;
-    height: 2px;
-    background-color: #fff;
-}
-
-.mobile-nav {
-    position: absolute;
-    top: 70px;
-    right: 2rem;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem;
-    border-radius: 4px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
   }
   
-  .mobile-nav.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+  .logo-area {
+    display: flex; align-items: center;
   }
   
-  .mobile-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .mit-logo { height: 28px; margin-right: 1rem; }
+  .text-group .project-sonar {
+    font-size: 1.1rem; font-weight: 600;
   }
   
-  .mobile-nav li {
-    margin: 0.5rem 0;
+
+  .menu-icon {
+    display: flex; gap: 0.5rem;
   }
   
-  .mobile-nav a {
-    text-decoration: none;
-    color: #e0e0e0;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  
-  .mobile-nav a:hover {
+  .top-bar .session-btn {
+    background: transparent;
     color: #fff;
+    border: 1px solid #fff;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
   }
+  .top-bar .session-btn:hover {
+    background: rgba(255,255,255,0.1);
+  }
+  
 
-.session-title {
+  .session-title {
     text-align: center;
-    margin: 2rem 0 1rem 0;
-}
-
-.session-title h1 {
+    margin: 80px 0 1rem;
+  }
+  .session-title h1 {
     font-size: 2rem;
     font-weight: 600;
-    color: #fff;
-    z-index: 10020;
-}
+  }
+  
 
-main {
+  main {
     padding: 1rem 2rem;
     max-width: 1400px;
     margin: 0 auto;
-}
-
-.two-column-layout {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.config-card {
-    flex: 0 0 30%;
-}
-
-.right-column {
+  }
+  
+  .two-column-layout {
+    display: flex; gap: 1.5rem;
+  }
+  
+  .config-card { flex: 0 0 30%; }
+  .right-column {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     gap: 1.5rem;
-}
+  }
+  
 
-.card {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    padding: 1.5rem;
-}
-
-.dark-card {
+  .card {
     background: #111;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    padding: 1.5rem;
     color: #fff;
-}
+  }
+  .logs-card { background: #000; }
+  
 
-.logs-card {
-    background: #000;
-    color: "white";
-}
-
-.card h2 {
+  .card h2 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 600;
-}
+  }
+  
 
-.form-group {
+  .form-group {
+    display: flex; flex-direction: column;
     margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-.form-group input,
-.form-group select {
+  }
+  .form-group label {
+    margin-bottom: 0.5rem; font-weight: 600; color: #fff;
+  }
+  .form-group input,
+  .form-group select {
     padding: 0.5rem;
     border: none;
     border-radius: 4px;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.config-card input,
-.config-card select {
+    background: #333;
     color: #fff;
-    background-color: #333;
-}
-
-button,
-.btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 4px;
     font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: #fff;
-}
+  }
+  
 
-button:hover,
-.btn:hover {
-    opacity: 0.9;
-}
-
-#save-config-button {
+  #save-config-button {
     background-color: #ff2a2a;
-    margin-right: 10px;
-}
-
-.connect-button {
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none; border-radius: 4px;
+    font-size: 1rem; cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+  #save-config-button:hover { background-color: #e60000; }
+  
+  .connect-button {
     background-color: #2a7fff;
-}
-
-.connect-button:disabled {
-    background-color: #666;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none; border-radius: 4px;
+    font-size: 1rem; cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .connect-button:disabled {
+    background-color: #555;
     cursor: not-allowed;
     opacity: 0.7;
-}
+  }
+  .connect-button:not(:disabled):hover {
+    background-color: #1a6eff;
+  }
+  
 
-input[type="file"] {
-    display: none;
-}
-
-.file-label {
+  input[type="file"] { display: none; }
+  .file-label {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1.2rem;
     background-color: #ff2a2a;
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    transition: background-color 0.2s ease;
+  }
+  .file-label:hover { background-color: #e60000; }
+  
 
-.file-label:hover {
-    background-color: #e60000;
-}
-
-.data-input-container {
-    display: flex;
-    margin-bottom: 1rem;
-}
-
-.data-upload {
-    width: 100%;
-}
-
-.styled-select {
-    width: 100%;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px;
+  .styled-select {
+    appearance: none;
     background-color: #333;
     color: #fff;
+    padding: 0.6rem;
+    border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%23FFF' d='M96 192l128 128 128-128z'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.7rem top 50%;
-    background-size: 0.65rem auto;
-}
-
-.sample-partitions {
+    background-position: right 0.7rem center;
+    background-size: 0.75rem auto;
+  }
+  
+  
+  .sample-partitions {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid #333;
-}
+  }
+  
+ 
+  .data-section {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+  .data-block { flex: 1; }
+  .input-note {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    margin-top: 0.5rem;
+  }
+  
 
-#console-output {
+  #console-output {
     background: #f5f5f5;
+    color: #000;
     padding: 1rem;
     border-radius: 4px;
     height: 150px;
     overflow-y: auto;
     font-family: monospace;
+  }
+  
+
+.graph-overlay {
+  
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+
+  .graph-container {
+    background: #fff;
     color: #000;
-}
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+  
 
-.data-section {
+  #trainingChart {
+    background: #fff !important;
+  }
+  
+ 
+  .close-graph {
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
     display: flex;
-    gap: 2rem;
-}
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+  .close-graph:hover {
+    background: #2a7fff;
+    color: #fff;
+  }
+  
 
-.data-block {
-    flex: 1;
-}
 
-.input-note {
-    font-style: italic;
-    font-size: 0.9rem;
-    color: #b0b0b0;
-    margin-top: 0.5rem;
-}
-
-@media (max-width: 900px) {
-    .two-column-layout {
-        flex-direction: column;
+ 
+  #show-graph-btn {
+    background: #fff;
+    color: #000;
+    border: 2px solid #2a7fff;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  #show-graph-btn:hover {
+    background: #2a7fff;
+    color: #fff;
+  }
+  
+  /* Responsive */
+  @media (max-width: 900px) {
+    .two-column-layout { flex-direction: column; }
+    .config-card, .right-column { flex: 1; }
+  }
+  @media (max-width: 600px) {
+    .session-btn, #save-config-button, .connect-button {
+      padding: 0.4rem 0.8rem; font-size: 0.9rem;
     }
-
-    .config-card {
-        flex: 1;
-    }
-
-    .right-column {
-        flex: 1;
-    }
-}
+  }
+  
