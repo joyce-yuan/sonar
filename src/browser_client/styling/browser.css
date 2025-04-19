@@ -4,44 +4,56 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  
-  html, body {
+}
+
+
+html,
+body {
     width: 100%;
     min-height: 100vh;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #e0e0e0;
     background: url("../assets/webwall.jpeg") no-repeat center center/cover;
     overflow-y: auto;
-  }
-  
+}
 
-  .top-bar {
+
+.top-bar {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 60px;
-    background: rgba(0,0,0,0.85);
-    display: flex; align-items: center; justify-content: space-between;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 1.5rem;
     z-index: 1000;
-  }
-  
-  .logo-area {
-    display: flex; align-items: center;
-  }
-  
-  .mit-logo { height: 28px; margin-right: 1rem; }
-  .text-group .project-sonar {
-    font-size: 1.1rem; font-weight: 600;
-  }
-  
+}
 
-  .menu-icon {
-    display: flex; gap: 0.5rem;
-  }
-  
-  .top-bar .session-btn {
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.mit-logo {
+    height: 28px;
+    margin-right: 1rem;
+}
+
+.text-group .project-sonar {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+.menu-icon {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.top-bar .session-btn {
     background: transparent;
     color: #fff;
     border: 1px solid #fff;
@@ -50,106 +62,133 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  .top-bar .session-btn:hover {
-    background: rgba(255,255,255,0.1);
-  }
-  
+}
 
-  .session-title {
+.top-bar .session-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+.session-title {
     text-align: center;
     margin: 80px 0 1rem;
-  }
-  .session-title h1 {
+}
+
+.session-title h1 {
     font-size: 2rem;
     font-weight: 600;
-  }
-  
+}
 
-  main {
+
+main {
     padding: 1rem 2rem;
     max-width: 1400px;
     margin: 0 auto;
-  }
-  
-  .two-column-layout {
-    display: flex; gap: 1.5rem;
-  }
-  
-  .config-card { flex: 0 0 30%; }
-  .right-column {
-    flex: 1;
-    display: flex; flex-direction: column;
-    gap: 1.5rem;
-  }
-  
+}
 
-  .card {
+.two-column-layout {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.config-card {
+    flex: 0 0 30%;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.card {
     background: #111;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     padding: 1.5rem;
     color: #fff;
-  }
-  .logs-card { background: #000; }
-  
+}
 
-  .card h2 {
+.logs-card {
+    background: #000;
+}
+
+
+.card h2 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     font-weight: 600;
-  }
-  
+}
 
-  .form-group {
-    display: flex; flex-direction: column;
+
+.form-group {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
-  }
-  .form-group label {
-    margin-bottom: 0.5rem; font-weight: 600; color: #fff;
-  }
-  .form-group input,
-  .form-group select {
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.form-group input,
+.form-group select {
     padding: 0.5rem;
     border: none;
     border-radius: 4px;
     background: #333;
     color: #fff;
     font-size: 1rem;
-  }
-  
+}
 
-  #save-config-button {
+
+#save-config-button {
     background-color: #ff2a2a;
     color: #fff;
     padding: 0.6rem 1.2rem;
-    border: none; border-radius: 4px;
-    font-size: 1rem; cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
     margin-right: 0.5rem;
     transition: background-color 0.2s ease;
-  }
-  #save-config-button:hover { background-color: #e60000; }
-  
-  .connect-button {
-    background-color: #2a7fff;
+}
+
+#save-config-button:hover {
+    background-color: #e60000;
+}
+
+.connect-button {
+    background-color:white;
     color: #fff;
     padding: 0.6rem 1.2rem;
-    border: none; border-radius: 4px;
-    font-size: 1rem; cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  .connect-button:disabled {
+}
+
+.connect-button:disabled {
     background-color: #555;
     cursor: not-allowed;
     opacity: 0.7;
-  }
-  .connect-button:not(:disabled):hover {
-    background-color: #1a6eff;
-  }
-  
+}
 
-  input[type="file"] { display: none; }
-  .file-label {
+.connect-button:not(:disabled):hover {
+    background-color: #1a6eff;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+.file-label {
     display: inline-block;
     padding: 0.6rem 1.2rem;
     background-color: #ff2a2a;
@@ -157,11 +196,14 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  .file-label:hover { background-color: #e60000; }
-  
+}
 
-  .styled-select {
+.file-label:hover {
+    background-color: #e60000;
+}
+
+
+.styled-select {
     appearance: none;
     background-color: #333;
     color: #fff;
@@ -173,29 +215,35 @@
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
     background-size: 0.75rem auto;
-  }
-  
-  
-  .sample-partitions {
+}
+
+
+.sample-partitions {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid #333;
-  }
-  
- 
-  .data-section {
-    display: flex; gap: 2rem; flex-wrap: wrap;
-  }
-  .data-block { flex: 1; }
-  .input-note {
+}
+
+
+.data-section {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.data-block {
+    flex: 1;
+}
+
+.input-note {
     font-style: italic;
     font-size: 0.9rem;
     color: #b0b0b0;
     margin-top: 0.5rem;
-  }
-  
+}
 
-  #console-output {
+
+#console-output {
     background: #f5f5f5;
     color: #000;
     padding: 1rem;
@@ -203,30 +251,31 @@
     height: 150px;
     overflow-y: auto;
     font-family: monospace;
-  }
-  
+}
+
 
 .graph-overlay {
-  
-    background: rgba(0, 0, 0, 0.9);
-  }
-  
 
-  .graph-container {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+
+.graph-container {
     background: #fff;
     color: #000;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-  }
-  
+}
 
-  #trainingChart {
+
+#trainingChart {
     background: #fff !important;
-  }
-  
- 
-  .close-graph {
-    background: #fff;
-    color: #000;
+}
+
+
+.close-graph {
+    
+    background: black;
+    color: blue;
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -234,16 +283,17 @@
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-  }
-  .close-graph:hover {
+}
+
+.close-graph:hover {
     background: #2a7fff;
     color: #fff;
-  }
-  
+}
 
 
- 
-  #show-graph-btn {
+
+
+#show-graph-btn {
     background: #fff;
     color: #000;
     border: 2px solid #2a7fff;
@@ -252,20 +302,31 @@
     font-size: 1rem;
     font-weight: 600;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  #show-graph-btn:hover {
+}
+
+#show-graph-btn:hover {
     background: #2a7fff;
     color: #fff;
-  }
-  
-  /* Responsive */
-  @media (max-width: 900px) {
-    .two-column-layout { flex-direction: column; }
-    .config-card, .right-column { flex: 1; }
-  }
-  @media (max-width: 600px) {
-    .session-btn, #save-config-button, .connect-button {
-      padding: 0.4rem 0.8rem; font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .two-column-layout {
+        flex-direction: column;
     }
-  }
-  
+
+    .config-card,
+    .right-column {
+        flex: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .session-btn,
+    #save-config-button,
+    .connect-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}
