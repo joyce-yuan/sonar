@@ -98,6 +98,20 @@
     #trainingChart {
       width: 100% !important;
       height: 100% !important;
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+    }
+    
+    .checkbox-group label {
+      margin-bottom: 0;
     }
   </style>
 </head>
@@ -146,6 +160,10 @@
           <div class="form-group">
             <label for="session_id">Session ID</label>
             <input type="text" id="session_id" name="session_id" value="1111" required />
+          </div>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="join_active_session" name="join_active_session">
+            <label for="join_active_session">Join active session</label>
           </div>
           <div class="form-group">
             <label for="epochs">Epochs</label>
@@ -258,6 +276,9 @@
       const sessionIdInput = document.getElementById('session_id');
       const epochsInput = document.getElementById('epochs');
       const numCollaboratorsInput = document.getElementById('num_collaborators');
+      const joinActiveSessionCheckbox = document.getElementById('join_active_session');
+      
+      // Check if we have session configuration in localStorage
       const sessionId = localStorage.getItem('sessionId');
 
       if (sessionId) {
@@ -272,7 +293,13 @@
           epochsInput.value = localStorage.getItem('epochs');
         if (localStorage.getItem('numCollaborators'))
           numCollaboratorsInput.value = localStorage.getItem('numCollaborators');
-
+        }
+        
+        if (localStorage.getItem('joinActiveSession')) {
+          joinActiveSessionCheckbox.checked = localStorage.getItem('joinActiveSession') === 'true';
+        }
+        
+        // Highlight the form to indicate it's been pre-filled
         const configForm = document.getElementById('config-form');
         configForm.classList.add('pre-filled');
         const notification = document.createElement('div');

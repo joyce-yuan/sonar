@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     num_users        : +localStorage.getItem('numUsers') || 3,
     session_id       : localStorage.getItem('sessionId') || '1111',
     epochs           : +localStorage.getItem('epochs') || 10,
-    num_collaborators: +localStorage.getItem('numCollaborators') || 1
+    num_collaborators: +localStorage.getItem('numCollaborators') || 1,
+    joinActiveSession: localStorage.getItem('joinActiveSession') || false,
   };
 
   let trainDataset = null;
@@ -30,15 +31,27 @@ document.addEventListener('DOMContentLoaded', () => {
     consoleOutput.scrollTop = consoleOutput.scrollHeight;
   }
 
-  // Enable/disable UI
-  function disableControls() {
-    [trainDataInput, testDataInput, fileDropdown, startButton, saveConfigButton]
-      .forEach(el => el.disabled = true);
-  }
-  function enableControls() {
-    trainDataInput.disabled   = false;
-    testDataInput.disabled    = false;
-    fileDropdown.disabled     = false;
+// Add sample partitions to dropdown
+samplePartitions.forEach(file => {
+    const option = document.createElement('option');
+    option.value = file;
+    option.textContent = file;
+    fileDropdown.appendChild(option);
+});
+
+function disableButtons() {
+    trainDataInput.disabled = true;
+    testDataInput.disabled = true;
+    fileDropdown.disabled = true;
+    startButton.disabled = true;
+    saveConfigButton.disabled = true;
+}
+
+function enableButtons() {
+    trainDataInput.disabled = false;
+    testDataInput.disabled = false;
+    fileDropdown.disabled = false;
+    startButton.disabled = trainDataset === null; // Only enable if training data exists
     saveConfigButton.disabled = false;
     startButton.disabled      = (trainDataset === null);
   }
@@ -50,22 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
     fileDropdown.appendChild(opt);
   }
 
-  // Save config handler (unchanged)
-  saveConfigButton.addEventListener('click', () => {
-    config.algos.node_0.topology     = document.getElementById('topology').value;
-    config.signaling_server          = document.getElementById('signaling_server').value;
-    config.num_users                 = +document.getElementById('num_users').value;
-    config.session_id                = document.getElementById('session_id').value;
-    config.epochs                    = +document.getElementById('epochs').value;
-    config.num_collaborators         = +document.getElementById('num_collaborators').value;
-
-    localStorage.setItem('topology',        config.algos.node_0.topology);
+saveConfigButton.addEventListener('click', function() {
+    config.algos.node_0.topology = document.getElementById('topology').value;
+    config.signaling_server = document.getElementById('signaling_server').value;
+    config.num_users = document.getElementById('num_users').value;
+    config.session_id = document.getElementById('session_id').value;
+    config.epochs = document.getElementById('epochs').value;
+    config.num_collaborators = document.getElementById('num_collaborators').value;
+    config.joinActiveSession = document.getElementById('join_active_session').checked;
+    
+    // Save to localStorage for persistence
+    localStorage.setItem('topology', config.algos.node_0.topology);
     localStorage.setItem('signalingServer', config.signaling_server);
-    localStorage.setItem('numUsers',        config.num_users);
-    localStorage.setItem('sessionId',       config.session_id);
-    localStorage.setItem('epochs',          config.epochs);
-    localStorage.setItem('numCollaborators',config.num_collaborators);
-
+    localStorage.setItem('numUsers', config.num_users);
+    localStorage.setItem('sessionId', config.session_id);
+    localStorage.setItem('epochs', config.epochs);
+    localStorage.setItem('numCollaborators', config.num_collaborators);
+    localStorage.setItem('joinActiveSession', config.joinActiveSession);
+    
     displayMessage('Config Saved:');
     displayMessage(JSON.stringify(config, null, 2));
     if (trainDataset) startButton.disabled = false;
